@@ -88,4 +88,12 @@ button {
         width: 95%;
         padding: 8px;
     }
+    #first-row,
+    #second-row,
+    #third-row,
+    #fourth-row,
+    #fifth-row{
+    display:flex;
+    justify-content:space-between;
+    }
 }

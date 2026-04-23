@@ -3,8 +3,7 @@ body{
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    background-image:linear-gradient(to right,skyblue,pink,orange)
-;            
+    background-image:linear-gradient(to right,skyblue,pink,orange);            
 }
 .main-container{
     border:1px solid black;
@@ -86,7 +85,11 @@ button {
 
     .main-container{
         width: 95%;
-        padding: 8px;
+        margin: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;margin-top: auto;
+        margin-bottom: auto;
     }
     #first-row,
     #second-row,

@@ -1,0 +1,12 @@
+Basic Calculator Project
+
+Features:
+- Addition, Subtraction, Multiplication, Division
+- Chaining operations (2 + 3 + 5)
+- Clear and Backspace
+- Responsive UI
+
+Built using:
+- HTML
+- CSS
+- JavaScript

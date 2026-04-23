@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <script src="https://kit.fontawesome.com/3fe6c23444.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="displayscreen">
+            <h1>Basic Calculator</h1>
+            <input type="text" id="output" readonly>
+        </div>
+        <div>
+            <div id="first-row">
+                <button id="addBtn" class="operatorBtn">+</button>
+                <button id="subtractBtn" class="operatorBtn">-</button>
+                <button id="multiplyBtn" class="operatorBtn">*</button>
+                <button id="divideBtn" class="operatorBtn">/</button>
+            </div>
+            <div id="second-row">
+                    <button id="sevenBtn" class="numberBtn">7</button>
+                    <button id="eightBtn" class="numberBtn">8</button>
+                    <button id="nineBtn" class="numberBtn">9</button>
+                    <button id="backspaceBtn" class="backspaceBtn"><i class="fas fa-backspace"></i></button>
+            </div>
+            <div id="third-row">
+                    <button id="fourBtn" class="numberBtn">4</button>
+                    <button id="fiveBtn" class="numberBtn">5</button>
+                    <button id="sixBtn" class="numberBtn">6</button>
+                    <button id="clearAllBtn" class="clearBtn">C</button>                    
+            </div>
+            <div id="fourth-row">
+                    <button id="oneBtn" class="numberBtn">1</button>
+                    <button id="twoBtn" class="numberBtn">2</button>
+                    <button id="threeBtn" class="numberBtn">3</button>
+                    <button id="modulusBtn" class="operatorBtn">%</button>
+            </div>
+            <div id="fifth-row">
+                    <button id="doubleZeroBtn" class="numberBtn">00</button>
+                    <button id="zeroBtn" class="numberBtn">0</button>
+                    <button id="dot" class="numberBtn">.</button>
+                    <button id="equalsBtn" class="equalsBtn">=</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <Script>
+
+        let buttons=document.querySelectorAll('.numberBtn');
+        let operators=document.querySelectorAll('.operatorBtn');
+        let clearBtn=document.querySelector('.clearBtn');
+        let backspaceBtn=document.querySelector('.backspaceBtn');
+        let equalsBtn=document.querySelector('.equalsBtn');
+        let output=document.getElementById('output');
+        
+        let firstNumber="";
+        let secondNumber="";
+        let operator="";
+        
+        
+        buttons.forEach(button=>{
+            button.addEventListener('click',()=>{
+                output.value+=button.innerText;
+
+                if(operator === ""){
+                    firstNumber += button.innerText;
+                }else{
+                    secondNumber += button.innerText;
+                }
+            })        
+        })
+        
+
+        clearBtn.addEventListener('click',()=>{
+            output.value="";
+            firstNumber="";
+            secondNumber="";
+            operator="";
+        })
+        backspaceBtn.addEventListener('click',()=>{
+            output.value=output.value.slice(0,-1);
+            if(operator===""){
+                firstNumber=firstNumber.slice(0,-1);
+            }else{
+                secondNumber=secondNumber.slice(0,-1);
+            }
+        })
+        operators.forEach(op=>{
+    op.addEventListener('click',()=>{
+
+        // chaining logic
+        if(firstNumber !== "" && operator !== "" && secondNumber !== ""){
+            let result;
+
+            switch(operator){
+                case '+':
+                    result = parseFloat(firstNumber) + parseFloat(secondNumber);
+                    break;
+                case '-':
+                    result = parseFloat(firstNumber) - parseFloat(secondNumber);
+                    break;
+                case '*':
+                    result = parseFloat(firstNumber) * parseFloat(secondNumber);
+                    break;
+                case '/':
+                    if(parseFloat(secondNumber) === 0){
+                        output.value = "Error: Division by zero";
+                        return;
+                    }
+                    result = parseFloat(firstNumber) / parseFloat(secondNumber);
+                    break;
+                case '%':
+                    result = parseFloat(firstNumber) % parseFloat(secondNumber);
+                    break;
+            }
+
+            firstNumber = result.toString();
+            secondNumber = "";
+            output.value = firstNumber + " " + op.innerText + " ";
+        }
+
+            if(firstNumber !== ""){
+                operator = op.innerText;
+                 output.value += " " + operator + " ";
+            } else {
+                output.value = "Enter number first";
+            }
+
+            })
+        })
+            equalsBtn.addEventListener('click',()=>{
+        if(firstNumber !== "" && secondNumber !== "" && operator !== ""){
+            let result;
+
+            switch(operator){
+                case '+':
+                    result = parseFloat(firstNumber) + parseFloat(secondNumber);
+                    break;
+                case '-':
+                    result = parseFloat(firstNumber) - parseFloat(secondNumber);
+                    break;
+                case '*':
+                    result = parseFloat(firstNumber) * parseFloat(secondNumber);
+                    break;
+                case '/':
+                    if(parseFloat(secondNumber) === 0){
+                        output.value = "Error: Division by zero";
+                        return;
+                    }
+                    result = parseFloat(firstNumber) / parseFloat(secondNumber);
+                    break;
+                case '%':
+                    result = parseFloat(firstNumber) % parseFloat(secondNumber);
+                    break;
+            }
+
+            output.value = result;
+
+            firstNumber = result.toString();
+            secondNumber = "";
+            operator = "";
+        } else {
+            output.value = "Invalid Expression";
+        }
+    });
+    </Script>
+</body>
+</html>
